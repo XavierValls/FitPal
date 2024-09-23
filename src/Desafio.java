@@ -7,6 +7,7 @@ public class Desafio {
 	private String descripcion;
 	private LocalDate fechaExp;
 	private String recompensa;
+	
 	public Desafio(PersonalTrainer personalTrainer, int anotados, String descripcion, LocalDate fechaExp,
 			String recompensa) {
 		super();

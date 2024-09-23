@@ -1,55 +1,87 @@
 import java.util.LinkedList;
 
-public class Alumno {
+public class Alumno extends Persona{
 
-	double peso;
-	double altura;
-	int nivel;
+	private double peso;
+	private int altura;
+	private String nivel;
 	private Objetivo objPersonal;
-	LinkedList<PersonalTrainer> contratado = new LinkedList<PersonalTrainer>();
-	public Alumno(double peso, double altura, int nivel, Objetivo objPersonal, LinkedList<PersonalTrainer> contratado) {
-		super();
+	
+	private LinkedList<PersonalTrainer> contratado = new LinkedList<PersonalTrainer>();
+	private LinkedList<Alumno> nuevoAlu = new LinkedList<Alumno>();
+
+	public Alumno(String nombre, String apellido, String email, String contra, String rol,
+			double peso, int altura, String nivel) {
+		super(nombre, apellido, email, contra, rol);
 		this.peso = peso;
 		this.altura = altura;
 		this.nivel = nivel;
-		this.objPersonal = objPersonal;
-		this.contratado = contratado;
 	}
+
+	public Alumno() {
+		super("nombre","apellido","email","contra","rol");
+	}
+
 	public double getPeso() {
 		return peso;
 	}
+
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
-	public double getAltura() {
+
+	public int getAltura() {
 		return altura;
 	}
-	public void setAltura(double altura) {
+
+	public void setAltura(int altura) {
 		this.altura = altura;
 	}
-	public int getNivel() {
+
+	public String getNivel() {
 		return nivel;
 	}
-	public void setNivel(int nivel) {
+
+	public void setNivel(String nivel) {
 		this.nivel = nivel;
 	}
+
 	public Objetivo getObjPersonal() {
 		return objPersonal;
 	}
+
 	public void setObjPersonal(Objetivo objPersonal) {
 		this.objPersonal = objPersonal;
 	}
+
 	public LinkedList<PersonalTrainer> getContratado() {
 		return contratado;
 	}
+
 	public void setContratado(LinkedList<PersonalTrainer> contratado) {
 		this.contratado = contratado;
 	}
+	
+
+	public LinkedList<Alumno> getNuevoAlu() {
+		return nuevoAlu;
+	}
+
+	public void setNuevoAlu(LinkedList<Alumno> nuevoAlu) {
+		this.nuevoAlu = nuevoAlu;
+	}
+
 	@Override
 	public String toString() {
 		return "Alumno [peso=" + peso + ", altura=" + altura + ", nivel=" + nivel + ", objPersonal=" + objPersonal
-				+ ", contratado=" + contratado + "]";
+				+ ", Nombre=" + getNombre() + ", Apellido=" + getApellido() + ", Email=" + getEmail()
+				+ ", Contra=" + getContra() + "]";
 	}
+
+	
+
+	
+
 	
 	
 }

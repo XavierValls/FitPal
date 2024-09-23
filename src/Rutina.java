@@ -6,6 +6,7 @@ public class Rutina {
 	private String descripcion;
 	private int tipoRutina;
 	private LinkedList<Comentario>comentarios = new LinkedList<Comentario>();
+	
 	public Rutina(PersonalTrainer personalTrainer, String descripcion, int tipoRutina,
 			LinkedList<Comentario> comentarios) {
 		super();

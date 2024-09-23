@@ -4,6 +4,7 @@ public class Comentario {
 
 	private String comentario;
 	private LocalDate fechaCom;
+	
 	public Comentario(String comentario, LocalDate fechaCom) {
 		super();
 		this.comentario = comentario;
