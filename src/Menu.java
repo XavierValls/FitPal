@@ -1,6 +1,8 @@
 
 public interface Menu {
 
-	public void menu();
+	public default void menu() {
+		
+	}
 	
 }

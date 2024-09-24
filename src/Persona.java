@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 import javax.swing.JOptionPane;
 
 public abstract class Persona {
@@ -46,13 +48,32 @@ public abstract class Persona {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+	
+
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", contra=" + contra + ", rol=" + rol + "]";
+		return "\nPersona [nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", contra=" + contra + ", rol=" + rol + "]";
 	}
 	
 	
 	public void Loguearse() {
+		String email = JOptionPane.showInputDialog("Ingrese su Email");
+		String contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
+		for (Alumno alumno : Alumno.getNuevoAlu()) {
+			if (alumno.getEmail().equals(email) && alumno.getContra().equals(contra)) {
+				JOptionPane.showMessageDialog(null, "Usuario Encontrado");
+				alumno.menuAlu();
+				return;
+			}
+		}
+		for (PersonalTrainer PersonalTrainer : PersonalTrainer.getNuevoPer()) {
+			if (PersonalTrainer.getEmail().equals(email) && PersonalTrainer.getContra().equals(contra)) {
+				JOptionPane.showMessageDialog(null, "Usuario Encontrado");
+				PersonalTrainer.menuPer();
+				return;
+			}
+		}
+		JOptionPane.showMessageDialog(null, "No se encontro ningun Usuario");
 		
 	}
 	
