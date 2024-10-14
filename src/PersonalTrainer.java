@@ -54,6 +54,7 @@ public class PersonalTrainer extends Persona{
 	public void setNuevoPer(LinkedList<PersonalTrainer> nuevoPer) {
 		this.nuevoPer = nuevoPer;
 	}
+	
 	@Override
 	public String toString() {
 		return "\nPersonalTrainer [calificacion=" + calificacion + ", disponiblidad=" + disponiblidad + ", aCargo="

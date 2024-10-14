@@ -3,12 +3,9 @@ import javax.swing.JOptionPane;
 public class Main {
 
 	public static void main(String[] args) {
+		Conexion.getInstance();
+		
 		int elegido;
-		Alumno temporal = new Alumno();
-		PersonalTrainer nuevo = new PersonalTrainer("Xavier","Valls","personal@gmail.com","12345","PersonalTrainer");
-		PersonalTrainer.getNuevoPer().add(nuevo);
-		Alumno nuevo2 = new Alumno("Xavier","Valls","alumno@gmail.com","12345","Alumno", 1, 1, "asd");
-		Alumno.getNuevoAlu().add(nuevo2);
 		String[] opcion = {
 				"Login", "Registrarse","Salir"
 		};
@@ -18,11 +15,11 @@ public class Main {
 		
 		switch (elegido) {
 		case 0:
-			temporal.Loguearse();
+			Persona.Loguearse();
 			break;
 
 		case 1:
-			temporal.Registrarse();
+			Persona.Registrarse();
 			break;
 		}
 		} while (elegido!=2);

@@ -12,8 +12,7 @@ public class Alumno extends Persona {
 	private LinkedList<PersonalTrainer> contratado = new LinkedList<PersonalTrainer>();
 	private static LinkedList<Alumno> nuevoAlu = new LinkedList<Alumno>();
 
-	public Alumno(String nombre, String apellido, String email, String contra, String rol,
-			double peso, int altura, String nivel) {
+	public Alumno(String nombre, String apellido, String email, String contra, String rol) {
 		super(nombre, apellido, email, contra, rol);
 		this.peso = peso;
 		this.altura = altura;

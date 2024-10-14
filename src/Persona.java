@@ -8,6 +8,7 @@ public abstract class Persona {
 	private String email;
 	private String contra;
 	private String rol;
+	private static LinkedList<Persona> usuarios = new LinkedList<Persona>();
 	
 	public Persona(String nombre, String apellido, String email, String contra, String rol) {
 		super();
@@ -50,13 +51,21 @@ public abstract class Persona {
 	}
 	
 
+	public static LinkedList<Persona> getUsuarios() {
+		return usuarios;
+	}
+
+	public static void setUsuarios(LinkedList<Persona> usuarios) {
+		Persona.usuarios = usuarios;
+	}
+
 	@Override
 	public String toString() {
 		return "\nPersona [nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", contra=" + contra + ", rol=" + rol + "]";
 	}
 	
 	
-	public void Loguearse() {
+	public static void Loguearse() {
 		String email = JOptionPane.showInputDialog("Ingrese su Email");
 		String contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
 		for (Alumno alumno : Alumno.getNuevoAlu()) {
@@ -77,25 +86,31 @@ public abstract class Persona {
 		
 	}
 	
-	public void Registrarse() {
+	public static void Registrarse() {
 		String nombre = JOptionPane.showInputDialog("Ingrese su Nombre");
 		String apellido = JOptionPane.showInputDialog("Ingrese su Apellido");
-		String email = JOptionPane.showInputDialog("Ingrese su Email");
+		boolean flag;
+		String email;
+		do {
+			flag = false;
+			email= JOptionPane.showInputDialog("Ingrese su Email");
+			for (Persona usuario : usuarios) {
+				if (usuario.getEmail().equals(email)) {
+					JOptionPane.showMessageDialog(null, "El email ya se encuentra registrado");
+					flag = true;
+				}
+			}
+		} while (flag);
 		String contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
 		String[] rol = {"PersonalTrainer","Alumno"};
 		String elegido = (String) JOptionPane.showInputDialog(null, email, contra, 0, null, rol, rol);
 		if (elegido.equals("PersonalTrainer")) {
-			PersonalTrainer nuevoPer = new PersonalTrainer(nombre,apellido,email,contra,elegido);
-			nuevoPer.getNuevoPer().add(nuevoPer);
+			PersonalTrainer nuevo = new PersonalTrainer(nombre,apellido,email,contra,elegido);
+			ControllerPersona.agregarUsuario(nuevo);
 			JOptionPane.showMessageDialog(null, "Registro Completado con Exito");
-			JOptionPane.showMessageDialog(null, nuevoPer.getNuevoPer());
-			
+			JOptionPane.showMessageDialog(null, nuevo.getNuevoPer());
 		} else {
-			double peso = Double.parseDouble(JOptionPane.showInputDialog("Ingrese su Peso en KG"));
-			int altura = Integer.parseInt(JOptionPane.showInputDialog("Ingrese su Altura en CM"));
-			String[] nivel = {"Principiante","Intermedio","Avanzado"};
-			String elegido2 = (String) JOptionPane.showInputDialog(null, email, contra, 0, null, nivel, nivel);
-			Alumno nuevoAlu = new Alumno(nombre,apellido,email,contra,elegido,peso,altura,elegido2);
+			Alumno nuevoAlu = new Alumno(nombre,apellido,email,contra,elegido);
 			nuevoAlu.getNuevoAlu().add(nuevoAlu);
 			JOptionPane.showMessageDialog(null, "Registro Completado con Exito");
 			JOptionPane.showMessageDialog(null, nuevoAlu.getNuevoAlu());
