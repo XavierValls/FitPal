@@ -26,6 +26,13 @@ public class Alumno extends Persona {
 		this.altura = altura;
 		this.nivel = nivel;
 	}
+	
+	public Alumno(int id) {
+		super(id);
+		this.peso = peso;
+		this.altura = altura;
+		this.nivel = nivel;
+	}
 
 	public Alumno() {
 		super("nombre","apellido","email","contra",2);

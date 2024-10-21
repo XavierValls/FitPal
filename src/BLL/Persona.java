@@ -3,6 +3,7 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+import DLL.ControllerAlumno;
 import DLL.ControllerPersona;
 import DLL.ControllerPersonalTrainer;
 
@@ -144,7 +145,7 @@ public class Persona {
 		} else {
 			Alumno nuevoAlu = new Alumno(nombre,apellido,email,contra,elegido);
 			int idUsuario = (int) ControllerPersona.agregarUsuario(nuevoAlu);
-			nuevoAlu.getNuevoAlu().add(nuevoAlu);
+			ControllerAlumno.agregarAlumno(new Alumno(idUsuario));
 			JOptionPane.showMessageDialog(null, "Registro Completado con Exito");
 			JOptionPane.showMessageDialog(null, nuevoAlu.getNuevoAlu());
 			
