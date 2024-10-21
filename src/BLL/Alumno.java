@@ -1,3 +1,4 @@
+package BLL;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -12,7 +13,14 @@ public class Alumno extends Persona {
 	private LinkedList<PersonalTrainer> contratado = new LinkedList<PersonalTrainer>();
 	private static LinkedList<Alumno> nuevoAlu = new LinkedList<Alumno>();
 
-	public Alumno(String nombre, String apellido, String email, String contra, String rol) {
+	public Alumno(int id,String nombre, String apellido, String email, String contra, int rol) {
+		super(id,nombre, apellido, email, contra, rol);
+		this.peso = peso;
+		this.altura = altura;
+		this.nivel = nivel;
+	}
+	
+	public Alumno(String nombre, String apellido, String email, String contra, int rol) {
 		super(nombre, apellido, email, contra, rol);
 		this.peso = peso;
 		this.altura = altura;
@@ -20,7 +28,7 @@ public class Alumno extends Persona {
 	}
 
 	public Alumno() {
-		super("nombre","apellido","email","contra","rol");
+		super("nombre","apellido","email","contra",2);
 	}
 
 	public double getPeso() {

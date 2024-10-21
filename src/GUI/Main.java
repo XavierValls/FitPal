@@ -1,4 +1,8 @@
+package GUI;
 import javax.swing.JOptionPane;
+
+import BLL.Persona;
+import DLL.Conexion;
 
 public class Main {
 

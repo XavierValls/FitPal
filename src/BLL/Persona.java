@@ -1,17 +1,41 @@
+package BLL;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
-public abstract class Persona {
+import DLL.ControllerPersona;
+import DLL.ControllerPersonalTrainer;
+
+public class Persona {
+	private int id;
 	private String nombre;
 	private String apellido;
 	private String email;
 	private String contra;
-	private String rol;
+	private int rol;
 	private static LinkedList<Persona> usuarios = new LinkedList<Persona>();
 	
-	public Persona(String nombre, String apellido, String email, String contra, String rol) {
+	public Persona(int id, String nombre, String apellido, String email, String contra, int rol) {
 		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.contra = contra;
+		this.rol = rol;
+	}
+	public Persona(String nombre, String apellido, String email, String contra, int rol) {
+		super();
+		this.id = 0;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.contra = contra;
+		this.rol = rol;
+	}
+	public Persona(int id) {
+		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
@@ -19,6 +43,13 @@ public abstract class Persona {
 		this.rol = rol;
 	}
 	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -43,14 +74,13 @@ public abstract class Persona {
 	public void setContra(String contra) {
 		this.contra = contra;
 	}
-	public String getRol() {
+	
+	public int getRol() {
 		return rol;
 	}
-	public void setRol(String rol) {
+	public void setRol(int rol) {
 		this.rol = rol;
 	}
-	
-
 	public static LinkedList<Persona> getUsuarios() {
 		return usuarios;
 	}
@@ -59,26 +89,27 @@ public abstract class Persona {
 		Persona.usuarios = usuarios;
 	}
 
+	
+	
+	
 	@Override
 	public String toString() {
-		return "\nPersona [nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", contra=" + contra + ", rol=" + rol + "]";
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", contra="
+				+ contra + ", rol=" + rol + "]";
 	}
-	
-	
 	public static void Loguearse() {
 		String email = JOptionPane.showInputDialog("Ingrese su Email");
 		String contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
-		for (Alumno alumno : Alumno.getNuevoAlu()) {
-			if (alumno.getEmail().equals(email) && alumno.getContra().equals(contra)) {
+		for (Persona persona : ControllerPersona.MostrarUsuarios()) {
+			if (persona.getEmail().equals(email) && persona.getContra().equals(contra)) {
 				JOptionPane.showMessageDialog(null, "Usuario Encontrado");
-				alumno.menuAlu();
-				return;
-			}
-		}
-		for (PersonalTrainer PersonalTrainer : PersonalTrainer.getNuevoPer()) {
-			if (PersonalTrainer.getEmail().equals(email) && PersonalTrainer.getContra().equals(contra)) {
-				JOptionPane.showMessageDialog(null, "Usuario Encontrado");
-				PersonalTrainer.menuPer();
+				if (persona.getRol()==1) {
+					PersonalTrainer	nuevo = new PersonalTrainer(persona.getId(), persona.getNombre(), persona.getApellido(), persona.getEmail(), persona.getContra(), persona.getRol());
+					nuevo.menuPer();
+				} else {
+					Alumno nuevo2 = new Alumno(persona.getId(), persona.getNombre(), persona.getApellido(), persona.getEmail(), persona.getContra(), persona.getRol());
+					nuevo2.menuAlu();
+				}
 				return;
 			}
 		}
@@ -94,7 +125,7 @@ public abstract class Persona {
 		do {
 			flag = false;
 			email= JOptionPane.showInputDialog("Ingrese su Email");
-			for (Persona usuario : usuarios) {
+			for (Persona usuario : ControllerPersona.MostrarUsuarios()) {
 				if (usuario.getEmail().equals(email)) {
 					JOptionPane.showMessageDialog(null, "El email ya se encuentra registrado");
 					flag = true;
@@ -102,15 +133,17 @@ public abstract class Persona {
 			}
 		} while (flag);
 		String contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
-		String[] rol = {"PersonalTrainer","Alumno"};
-		String elegido = (String) JOptionPane.showInputDialog(null, email, contra, 0, null, rol, rol);
-		if (elegido.equals("PersonalTrainer")) {
+		int elegido = Integer.parseInt(JOptionPane.showInputDialog("Ingrese 1 si es PersonalTrainer, Elija 2 si es Alumno"));
+		if (elegido==1) {
 			PersonalTrainer nuevo = new PersonalTrainer(nombre,apellido,email,contra,elegido);
-			ControllerPersona.agregarUsuario(nuevo);
+			int idUsuario = (int) ControllerPersona.agregarUsuario(nuevo);
+			ControllerPersonalTrainer.agregarPersonal(new PersonalTrainer(idUsuario));
+			
 			JOptionPane.showMessageDialog(null, "Registro Completado con Exito");
 			JOptionPane.showMessageDialog(null, nuevo.getNuevoPer());
 		} else {
 			Alumno nuevoAlu = new Alumno(nombre,apellido,email,contra,elegido);
+			int idUsuario = (int) ControllerPersona.agregarUsuario(nuevoAlu);
 			nuevoAlu.getNuevoAlu().add(nuevoAlu);
 			JOptionPane.showMessageDialog(null, "Registro Completado con Exito");
 			JOptionPane.showMessageDialog(null, nuevoAlu.getNuevoAlu());
@@ -118,5 +151,7 @@ public abstract class Persona {
 			
 		}
 	}
+	
+	
 	
 }

@@ -1,3 +1,4 @@
+package BLL;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -11,12 +12,24 @@ public class PersonalTrainer extends Persona{
 	private LinkedList<PersonalTrainer> horarios = new LinkedList<PersonalTrainer>();
 	private static LinkedList<PersonalTrainer> nuevoPer = new LinkedList<PersonalTrainer>();
 	
-	public PersonalTrainer(String nombre, String apellido, String email, String contra,
-			String rol) {
+	public PersonalTrainer(int id, String nombre, String apellido, String email, String contra,
+			int rol) {
+		super(id, nombre, apellido, email, contra, rol);
+		this.calificacion = 0;
+		this.disponiblidad = true;
+	}
+	public PersonalTrainer( String nombre, String apellido, String email, String contra,
+			int rol) {
 		super(nombre, apellido, email, contra, rol);
 		this.calificacion = 0;
 		this.disponiblidad = true;
 	}
+	public PersonalTrainer(int id) {
+		super(id);
+		this.calificacion = 0;
+		this.disponiblidad = true;
+	}
+	
 	public double getCalificacion() {
 		return calificacion;
 	}
