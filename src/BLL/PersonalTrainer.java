@@ -3,11 +3,13 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
-public class PersonalTrainer extends Persona{
+import DLL.ControllerPersonalTrainer;
 
+public class PersonalTrainer extends Persona{
+	private int idPersonalTrainer;
 	private double calificacion;
 	private boolean disponiblidad;
-	private LinkedList<Alumno> aCargo = new LinkedList<Alumno>();
+	private LinkedList<PersonalTrainer> aCargo = new LinkedList<PersonalTrainer>();
 	private LinkedList<Review> reviews = new LinkedList<Review>();
 	private LinkedList<PersonalTrainer> horarios = new LinkedList<PersonalTrainer>();
 	private static LinkedList<PersonalTrainer> nuevoPer = new LinkedList<PersonalTrainer>();
@@ -17,18 +19,35 @@ public class PersonalTrainer extends Persona{
 		super(id, nombre, apellido, email, contra, rol);
 		this.calificacion = 0;
 		this.disponiblidad = true;
+		this.idPersonalTrainer = 0;
+	}
+	public PersonalTrainer(int id, String nombre, String apellido, String email, String contra,
+			int rol,int idPersonalTrainer) {
+		super(id, nombre, apellido, email, contra, rol);
+		this.calificacion = 0;
+		this.disponiblidad = true;
+		this.idPersonalTrainer = idPersonalTrainer;
 	}
 	public PersonalTrainer( String nombre, String apellido, String email, String contra,
 			int rol) {
 		super(nombre, apellido, email, contra, rol);
 		this.calificacion = 0;
 		this.disponiblidad = true;
+		this.idPersonalTrainer = 0;
 	}
 	public PersonalTrainer(int id) {
 		super(id);
 		this.calificacion = 0;
 		this.disponiblidad = true;
+		this.idPersonalTrainer = 0;
 	}
+	public PersonalTrainer(int id, int id2) {
+		super(id);
+		this.calificacion = 0;
+		this.disponiblidad = true;
+		this.idPersonalTrainer = 0;
+	}
+	
 	
 	public double getCalificacion() {
 		return calificacion;
@@ -42,10 +61,10 @@ public class PersonalTrainer extends Persona{
 	public void setDisponiblidad(boolean disponiblidad) {
 		this.disponiblidad = disponiblidad;
 	}
-	public LinkedList<Alumno> getaCargo() {
+	public LinkedList<PersonalTrainer> getaCargo() {
 		return aCargo;
 	}
-	public void setaCargo(LinkedList<Alumno> aCargo) {
+	public void setaCargo(LinkedList<PersonalTrainer> aCargo) {
 		this.aCargo = aCargo;
 	}
 	public LinkedList<Review> getReviews() {
@@ -68,15 +87,22 @@ public class PersonalTrainer extends Persona{
 		this.nuevoPer = nuevoPer;
 	}
 	
-	@Override
-	public String toString() {
-		return "\nPersonalTrainer [calificacion=" + calificacion + ", disponiblidad=" + disponiblidad + ", aCargo="
-				+ aCargo + ", reviews=" + reviews + ", horarios=" + horarios + ", Nombre=" + getNombre()
-				+ ", Apellido=" + getApellido() + ", Email=" + getEmail() + ", Contra=" + getContra()
-				+ "]";
+	
+	public int getIdPersonalTrainer() {
+		return idPersonalTrainer;
 	}
+	public void setIdPersonalTrainer(int idPersonalTrainer) {
+		this.idPersonalTrainer = idPersonalTrainer;
+	}
+	
 
 	
+	@Override
+	public String toString() {
+		return "PersonalTrainer [idPersonalTrainer=" + idPersonalTrainer + ", calificacion=" + calificacion
+				+ ", disponiblidad=" + disponiblidad + ", aCargo=" + aCargo + ", reviews=" + reviews + ", horarios="
+				+ horarios + "]";
+	}
 	public void menuPer() {
 		JOptionPane.showMessageDialog(null, "Bienvenido de nuevo " +this.getNombre() + "!");
 		int opcion,opcion2,opcion3,opcion4,opcion5,opcion6;
@@ -104,7 +130,16 @@ public class PersonalTrainer extends Persona{
 					String[] tipoRut = {"Personalizada","Predeterminada"};
 					String eleccion = (String)JOptionPane.showInputDialog(null, "Que tipo de rutina creara?", 
 							null, JOptionPane.QUESTION_MESSAGE, null, tipoRut, tipoRut[0]);
-					JOptionPane.showMessageDialog(null, "Creo mis rutinas aqui");
+					if (eleccion.equals("Personalizada")) {
+						JOptionPane.showMessageDialog(null, this.getIdPersonalTrainer());
+						this.aCargo = ControllerPersonalTrainer.MostrarAlumnos(this.getIdPersonalTrainer());
+						String[] alumnos = new String[(this.aCargo.size())];
+				        for (int i = 0; i < this.aCargo.size(); i++) {
+				            alumnos[i] = this.aCargo.get(i).getNombre();
+				        }
+					} else {
+						
+					}
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null, "Edito las rutinas aqui");

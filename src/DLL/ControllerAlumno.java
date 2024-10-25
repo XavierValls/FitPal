@@ -57,4 +57,33 @@ public class ControllerAlumno {
 		return alumnos;
 		
 	}
+	
+	public static void AgregarContrato() {
+		try {
+			
+		} catch (Exception e) {
+			
+		}
+	}
+	
+	public static long ObtenerIdAlumno(int id) {
+
+		try {
+			
+			PreparedStatement statement = (PreparedStatement) 
+					con.prepareStatement("SELECT `idAlumno` FROM `alumno` WHERE `idUsuario` = (?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				return resultSet.getLong("idAlumno");
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+			
+			
+		}
+		return 0;
+		
+	}
+	
 }

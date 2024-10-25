@@ -105,10 +105,13 @@ public class Persona {
 			if (persona.getEmail().equals(email) && persona.getContra().equals(contra)) {
 				JOptionPane.showMessageDialog(null, "Usuario Encontrado");
 				if (persona.getRol()==1) {
-					PersonalTrainer	nuevo = new PersonalTrainer(persona.getId(), persona.getNombre(), persona.getApellido(), persona.getEmail(), persona.getContra(), persona.getRol());
-					nuevo.menuPer();
+					int idPersonal = (int) ControllerPersonalTrainer.ObtenerIdPersonal(persona.getId());
+					PersonalTrainer	nuevo = new PersonalTrainer(persona.getId(), persona.getNombre(), persona.getApellido(), persona.getEmail(), persona.getContra(), persona.getRol(), idPersonal);
+					nuevo.menuPer();	
+					
 				} else {
-					Alumno nuevo2 = new Alumno(persona.getId(), persona.getNombre(), persona.getApellido(), persona.getEmail(), persona.getContra(), persona.getRol());
+					int idAlumno = (int) ControllerAlumno.ObtenerIdAlumno(persona.getId());
+					Alumno nuevo2 = new Alumno(persona.getId(), persona.getNombre(), persona.getApellido(), persona.getEmail(), persona.getContra(), persona.getRol(), idAlumno);
 					nuevo2.menuAlu();
 				}
 				return;
@@ -138,7 +141,8 @@ public class Persona {
 		if (elegido==1) {
 			PersonalTrainer nuevo = new PersonalTrainer(nombre,apellido,email,contra,elegido);
 			int idUsuario = (int) ControllerPersona.agregarUsuario(nuevo);
-			ControllerPersonalTrainer.agregarPersonal(new PersonalTrainer(idUsuario));
+			int idPersonal = (int)ControllerPersonalTrainer.agregarPersonal(new PersonalTrainer(idUsuario));
+			nuevo.setIdPersonalTrainer(idPersonal);
 			
 			JOptionPane.showMessageDialog(null, "Registro Completado con Exito");
 			JOptionPane.showMessageDialog(null, nuevo.getNuevoPer());

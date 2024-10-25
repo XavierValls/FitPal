@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 public class Alumno extends Persona {
-
+	private int idAlumno;
 	private double peso;
 	private int altura;
 	private String nivel;
@@ -19,6 +19,13 @@ public class Alumno extends Persona {
 		this.altura = altura;
 		this.nivel = nivel;
 	}
+	public Alumno(int id,String nombre, String apellido, String email, String contra, int rol, int idAlumno) {
+		super(id,nombre, apellido, email, contra, rol);
+		this.peso = peso;
+		this.altura = altura;
+		this.nivel = nivel;
+		this.idAlumno = idAlumno;
+	}
 	
 	public Alumno(String nombre, String apellido, String email, String contra, int rol) {
 		super(nombre, apellido, email, contra, rol);
@@ -26,6 +33,7 @@ public class Alumno extends Persona {
 		this.altura = altura;
 		this.nivel = nivel;
 	}
+	
 	
 	public Alumno(int id) {
 		super(id);
@@ -86,15 +94,23 @@ public class Alumno extends Persona {
 	public void setNuevoAlu(LinkedList<Alumno> nuevoAlu) {
 		this.nuevoAlu = nuevoAlu;
 	}
+	
 
-	@Override
-	public String toString() {
-		return "\nAlumno [peso=" + peso + ", altura=" + altura + ", nivel=" + nivel + ", objPersonal=" + objPersonal
-				+ ", Nombre=" + getNombre() + ", Apellido=" + getApellido() + ", Email=" + getEmail()
-				+ ", Contra=" + getContra() + "]";
+
+	public int getIdAlumno() {
+		return idAlumno;
+	}
+	public void setIdAlumno(int idAlumno) {
+		this.idAlumno = idAlumno;
 	}
 
+
 	
+	@Override
+	public String toString() {
+		return "Alumno [idAlumno=" + idAlumno + ", peso=" + peso + ", altura=" + altura + ", nivel=" + nivel
+				+ ", objPersonal=" + objPersonal + ", contratado=" + contratado + "]";
+	}
 	public void menuAlu() {
 		JOptionPane.showMessageDialog(null, "Bienvenido de nuevo " +this.getNombre() + "!");
 		int opcion,opcion2,opcion3,opcion4,opcion5,opcion6;
@@ -159,6 +175,7 @@ public class Alumno extends Persona {
 
 				case 1:
 					JOptionPane.showMessageDialog(null, "Aqui contrato personal trainers");
+					
 					break;
 					
 				case 2:
