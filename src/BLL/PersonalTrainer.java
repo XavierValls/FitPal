@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import DLL.ControllerAlumno;
+import DLL.ControllerDesafio;
 import DLL.ControllerPersonalTrainer;
 import DLL.ControllerRutina;
 
@@ -296,7 +297,7 @@ public class PersonalTrainer extends Persona{
 				case 0:
 					try {
 						JOptionPane.showMessageDialog(null, "Aqui veo los desafios disponibles");
-						LinkedList<Desafio> desafios = ControllerPersonalTrainer.desafiosDispo();
+						LinkedList<Desafio> desafios = ControllerDesafio.desafiosDispo();
 						String[] tituloDes2 = new String[desafios.size()];
 						for (int i = 0; i < desafios.size(); i++) {
 							tituloDes2[i] = desafios.get(i).getTitulo();
@@ -336,7 +337,7 @@ public class PersonalTrainer extends Persona{
 					                } else {
 					                    PersonalTrainer nuevoPerso = new PersonalTrainer(this.getIdPersonalTrainer());
 					                    java.sql.Date sqlFechaIngresada = new java.sql.Date(fechaIngresada.getTime());
-					                    ControllerPersonalTrainer.agregarDesafio(new Desafio(tituloDes, descripcionDes, sqlFechaIngresada, nuevoPerso));
+					                    ControllerDesafio.agregarDesafio(new Desafio(tituloDes, descripcionDes, sqlFechaIngresada, nuevoPerso));
 					                    JOptionPane.showMessageDialog(null, "Desafio agregado exitosamente.");
 					                }
 					            }
@@ -345,14 +346,14 @@ public class PersonalTrainer extends Persona{
 					} catch (Exception e) {
 					    JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
 					}
-
+					
 
 					
 					break;
 					
 				case 2:
 					JOptionPane.showMessageDialog(null, "Aqui puedo eliminar desafios");
-					LinkedList<Desafio> misDesafios2 = ControllerPersonalTrainer.misDesafios(this.getIdPersonalTrainer());
+					LinkedList<Desafio> misDesafios2 = ControllerDesafio.misDesafios(this.getIdPersonalTrainer());
 					String[] tituloMisDes2 = new String[misDesafios2.size()];
 					for (int i = 0; i < misDesafios2.size(); i++) {
 						tituloMisDes2[i] = misDesafios2.get(i).getTitulo();
@@ -373,13 +374,13 @@ public class PersonalTrainer extends Persona{
 					String eleccion2 = (String)JOptionPane.showInputDialog(null, "Esta seguro que quiere eliminar este desafio?", 
 							null, JOptionPane.QUESTION_MESSAGE, null, confirmacion2, confirmacion2[0]);
 					if (eleccion2.equals("Confirmar")) {
-						ControllerPersonalTrainer.eliminarDesafio(DesSel3.getIdDesafio());
+						ControllerDesafio.eliminarDesafio(DesSel3.getIdDesafio());
 					} 
 					break;
 				case 3:
 					try {
 						JOptionPane.showMessageDialog(null, "Aqui veo los desafios que cree yo");
-						LinkedList<Desafio> misDesafios = ControllerPersonalTrainer.misDesafios(this.getIdPersonalTrainer());
+						LinkedList<Desafio> misDesafios = ControllerDesafio.misDesafios(this.getIdPersonalTrainer());
 						String[] tituloMisDes = new String[misDesafios.size()];
 						for (int i = 0; i < misDesafios.size(); i++) {
 							tituloMisDes[i] = misDesafios.get(i).getTitulo();

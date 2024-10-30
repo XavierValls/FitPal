@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import DLL.ControllerAlumno;
+import DLL.ControllerContrato;
+import DLL.ControllerDesafio;
+import DLL.ControllerObjetivo;
 import DLL.ControllerPersonalTrainer;
 import DLL.ControllerRutina;
 
@@ -186,7 +189,7 @@ public class Alumno extends Persona {
 				opcion3 = JOptionPane.showOptionDialog(null, "Elegi una opcion", null, 0, 0, null, opciones3, opciones3[0]);
 				switch (opcion3) {
 				case 0:
-					JOptionPane.showMessageDialog(null, ControllerAlumno.mostrarObjetivoDelAlumno(this.getIdAlumno()));
+					JOptionPane.showMessageDialog(null, ControllerObjetivo.mostrarObjetivoDelAlumno(this.getIdAlumno()));
 					break;
 
 				case 1:
@@ -207,7 +210,7 @@ public class Alumno extends Persona {
 									if (fechaIngresada.isBefore(fechaActual)) {
 										JOptionPane.showMessageDialog(null, "La fecha tiene que ser mayor a la fecha actual");
 									} else {
-										ControllerAlumno.AgregarObjetivo(otroObj, fechaIngresada,this.getIdAlumno());
+										ControllerObjetivo.AgregarObjetivo(otroObj, fechaIngresada,this.getIdAlumno());
 										
 									}
 								} else {
@@ -221,7 +224,7 @@ public class Alumno extends Persona {
 									if (fechaIngresada.isBefore(fechaActual)) {
 										JOptionPane.showMessageDialog(null, "La fecha tiene que ser mayor a la fecha actual");
 									} else {
-										ControllerAlumno.AgregarObjetivo(objetivoElegido, fechaIngresada,this.getIdAlumno());
+										ControllerObjetivo.AgregarObjetivo(objetivoElegido, fechaIngresada,this.getIdAlumno());
 									}
 							} else {
 								JOptionPane.showMessageDialog(null, "Error, Ingrese la fecha de manera correcta");
@@ -256,14 +259,14 @@ public class Alumno extends Persona {
 								if (objetivoElegido2.equals("Otro objetivo")) {
 									String otroObj2 = JOptionPane.showInputDialog("Ingrese su Objetivo");
 									if (otroObj2!=null) {
-										Objetivo viejo = ControllerAlumno.mostrarObjetivoDelAlumno(this.getIdAlumno());
+										Objetivo viejo = ControllerObjetivo.mostrarObjetivoDelAlumno(this.getIdAlumno());
 										
-										ControllerAlumno.actualizarObjetivo(new Objetivo(viejo.getIdObjetivo(),otroObj2,viejo.getFechaCreacion(),viejo.getFechaObj()));
+										ControllerObjetivo.actualizarObjetivo(new Objetivo(viejo.getIdObjetivo(),otroObj2,viejo.getFechaCreacion(),viejo.getFechaObj()));
 									}
 									
 								} else {
-									Objetivo viejo = ControllerAlumno.mostrarObjetivoDelAlumno(this.getIdAlumno());
-									ControllerAlumno.actualizarObjetivo(new Objetivo(viejo.getIdObjetivo(),objetivoElegido2,viejo.getFechaCreacion(),viejo.getFechaObj()));
+									Objetivo viejo = ControllerObjetivo.mostrarObjetivoDelAlumno(this.getIdAlumno());
+									ControllerObjetivo.actualizarObjetivo(new Objetivo(viejo.getIdObjetivo(),objetivoElegido2,viejo.getFechaCreacion(),viejo.getFechaObj()));
 								}
 								
 								break;
@@ -276,8 +279,8 @@ public class Alumno extends Persona {
 										if (fechaIngresada2.isBefore(fechaActual2)) {
 											JOptionPane.showMessageDialog(null, "La fecha tiene que ser mayor a la fecha actual");
 										} else {
-											Objetivo viejo = ControllerAlumno.mostrarObjetivoDelAlumno(this.getIdAlumno());
-											ControllerAlumno.actualizarObjetivo(new Objetivo(viejo.getIdObjetivo(),viejo.getDescripcion(),viejo.getFechaCreacion(),fechaIngresada2));
+											Objetivo viejo = ControllerObjetivo.mostrarObjetivoDelAlumno(this.getIdAlumno());
+											ControllerObjetivo.actualizarObjetivo(new Objetivo(viejo.getIdObjetivo(),viejo.getDescripcion(),viejo.getFechaCreacion(),fechaIngresada2));
 										}
 								} else {
 									JOptionPane.showMessageDialog(null, "Error, Ingrese la fecha de manera correcta");
@@ -301,7 +304,7 @@ public class Alumno extends Persona {
 				switch (opcion4) {
 				case 0:
 					
-					JOptionPane.showMessageDialog(null, ControllerAlumno.mostrarContratosPorAlumno(this.getIdAlumno()));
+					JOptionPane.showMessageDialog(null, ControllerContrato.mostrarContratosPorAlumno(this.getIdAlumno()));
 					break;
 
 				case 1:
@@ -330,7 +333,7 @@ public class Alumno extends Persona {
 						int eleccion = JOptionPane.showOptionDialog(null, "Contrataras al " + personalElegido + " Durante 1 mes", null, 0, 0, null, confirmacion, confirmacion[0]);
 						switch (eleccion) {
 						case 0:
-							ControllerAlumno.agregarContrato(personalElegido.getIdPersonalTrainer(), this.getIdAlumno());
+							ControllerContrato.agregarContrato(personalElegido.getIdPersonalTrainer(), this.getIdAlumno());
 							break;
 							
 						default:
@@ -358,7 +361,7 @@ public class Alumno extends Persona {
 				case 0:
 					try {
 						JOptionPane.showMessageDialog(null, "Aqui veo los desafios disponibles");
-						LinkedList<Desafio> desafios = ControllerPersonalTrainer.desafiosDispo();
+						LinkedList<Desafio> desafios = ControllerDesafio.desafiosDispo();
 						String[] tituloDes2 = new String[desafios.size()];
 						for (int i = 0; i < desafios.size(); i++) {
 							tituloDes2[i] = desafios.get(i).getTitulo();
@@ -384,7 +387,7 @@ public class Alumno extends Persona {
 					JOptionPane.showMessageDialog(null, "Aqui me anoto a un desafio");
 					try {
 						JOptionPane.showMessageDialog(null, "Aqui veo los desafios disponibles");
-						LinkedList<Desafio> desafios = ControllerPersonalTrainer.desafiosDispo();
+						LinkedList<Desafio> desafios = ControllerDesafio.desafiosDispo();
 						String[] tituloDes2 = new String[desafios.size()];
 						for (int i = 0; i < desafios.size(); i++) {
 							tituloDes2[i] = desafios.get(i).getTitulo();
@@ -406,7 +409,7 @@ public class Alumno extends Persona {
 							String eleccion2 = (String)JOptionPane.showInputDialog(null, "Esta seguro que desea anotarse a este desafio?", 
 									null, JOptionPane.QUESTION_MESSAGE, null, confirmacion2, confirmacion2[0]);
 							if (eleccion2.equals("Confirmar")) {
-								ControllerAlumno.inscribirseEnDesafio(this.getIdAlumno(), DesSel.getIdDesafio());
+								ControllerDesafio.inscribirseEnDesafio(this.getIdAlumno(), DesSel.getIdDesafio());
 							} 
 						} catch (Exception e) {
 							// TODO: handle exception
@@ -420,7 +423,7 @@ public class Alumno extends Persona {
 					JOptionPane.showMessageDialog(null, "Aqui veo los desafios a los que me anote");
 					try {
 						JOptionPane.showMessageDialog(null, "Aqui veo los desafios en los que me anote");
-						LinkedList<Desafio> desafios = ControllerAlumno.MisDesafios(this.getIdAlumno());
+						LinkedList<Desafio> desafios = ControllerDesafio.MisDesafios(this.getIdAlumno());
 						String[] tituloDes2 = new String[desafios.size()];
 						for (int i = 0; i < desafios.size(); i++) {
 							tituloDes2[i] = desafios.get(i).getTitulo();
