@@ -43,6 +43,22 @@ public class Persona {
 		this.contra = contra;
 		this.rol = rol;
 	}
+	public Persona(int id, String nombre, String apellido) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.contra = contra;
+		this.rol = rol;
+	}
+	public Persona(String nombre, String apellido) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+
+	}
+	
 	
 	
 	public int getId() {

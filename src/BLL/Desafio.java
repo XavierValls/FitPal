@@ -1,15 +1,16 @@
 package BLL;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Desafio {
-
+	private int idDesafio;
 	private PersonalTrainer personalTrainer;
+	private String titulo;
 	private int anotados;
 	private String descripcion;
-	private LocalDate fechaExp;
+	private Date fechaExp;
 	private String recompensa;
 	
-	public Desafio(PersonalTrainer personalTrainer, int anotados, String descripcion, LocalDate fechaExp,
+	public Desafio(PersonalTrainer personalTrainer, int anotados, String descripcion, Date fechaExp,
 			String recompensa) {
 		super();
 		this.personalTrainer = personalTrainer;
@@ -18,6 +19,34 @@ public class Desafio {
 		this.fechaExp = fechaExp;
 		this.recompensa = recompensa;
 	}
+	public Desafio(String titulo, String descripcion, Date fechaExp, PersonalTrainer personalTrainer) {
+		super();
+		this.titulo=titulo;
+		this.descripcion = descripcion;
+		this.fechaExp = fechaExp;
+		this.personalTrainer = personalTrainer;
+	}
+	public Desafio(int idDesafio, String titulo, String descripcion, Date fechaExp, int idPersonalTrainer) {
+		super();
+		this.idDesafio = idDesafio;
+		this.titulo=titulo;
+		this.descripcion = descripcion;
+		this.fechaExp = fechaExp;
+		this.personalTrainer = new PersonalTrainer(idPersonalTrainer);
+	}
+	public Desafio(String titulo, String descripcion, Date fechaExp, int idPersonalTrainer) {
+		super();
+		this.titulo=titulo;
+		this.descripcion = descripcion;
+		this.fechaExp = fechaExp;
+		this.personalTrainer = new PersonalTrainer(idPersonalTrainer);
+	}
+	
+	
+	
+
+	
+	
 	public PersonalTrainer getPersonalTrainer() {
 		return personalTrainer;
 	}
@@ -36,10 +65,11 @@ public class Desafio {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public LocalDate getFechaExp() {
+	
+	public Date getFechaExp() {
 		return fechaExp;
 	}
-	public void setFechaExp(LocalDate fechaExp) {
+	public void setFechaExp(Date fechaExp) {
 		this.fechaExp = fechaExp;
 	}
 	public String getRecompensa() {
@@ -48,10 +78,23 @@ public class Desafio {
 	public void setRecompensa(String recompensa) {
 		this.recompensa = recompensa;
 	}
+	
+	public int getIdDesafio() {
+		return idDesafio;
+	}
+	public void setIdDesafio(int idDesafio) {
+		this.idDesafio = idDesafio;
+	}
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 	@Override
 	public String toString() {
-		return "Desafio [personalTrainer=" + personalTrainer + ", anotados=" + anotados + ", descripcion=" + descripcion
-				+ ", fechaExp=" + fechaExp + ", recompensa=" + recompensa + "]";
+		return "Desafio creado por " + personalTrainer+ "\nanotados=" + anotados + "\n descripcion=" + descripcion
+				+ "\n fechaExp=" + fechaExp;
 	}
 	
 	

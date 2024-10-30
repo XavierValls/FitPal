@@ -2,13 +2,20 @@ package BLL;
 import java.time.LocalDate;
 
 public class Objetivo {
-
+	private int idObjetivo;
 	private String descripcion;
 	private LocalDate fechaCreacion;
 	private LocalDate fechaObj;
 	
 	public Objetivo(String descripcion, LocalDate fechaCreacion, LocalDate fechaObj) {
 		super();
+		this.descripcion = descripcion;
+		this.fechaCreacion = fechaCreacion;
+		this.fechaObj = fechaObj;
+	}
+	public Objetivo(int idObjetivo,String descripcion, LocalDate fechaCreacion, LocalDate fechaObj) {
+		super();
+		this.idObjetivo = idObjetivo;
 		this.descripcion = descripcion;
 		this.fechaCreacion = fechaCreacion;
 		this.fechaObj = fechaObj;
@@ -30,6 +37,14 @@ public class Objetivo {
 	}
 	public void setFechaObj(LocalDate fechaObj) {
 		this.fechaObj = fechaObj;
+	}
+	
+	
+	public int getIdObjetivo() {
+		return idObjetivo;
+	}
+	public void setIdObjetivo(int idObjetivo) {
+		this.idObjetivo = idObjetivo;
 	}
 	@Override
 	public String toString() {
