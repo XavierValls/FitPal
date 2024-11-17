@@ -19,11 +19,11 @@ public class Main {
 		
 		switch (elegido) {
 		case 0:
-			Persona.Loguearse();
+			//Persona.Loguearse();
 			break;
 
 		case 1:
-			Persona.Registrarse();
+			//Persona.Registrarse();
 			break;
 		}
 		} while (elegido!=2);

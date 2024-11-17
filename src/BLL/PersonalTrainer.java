@@ -138,23 +138,27 @@ public class PersonalTrainer extends Persona{
 				opcion2 = JOptionPane.showOptionDialog(null, "Elegi una opcion", null, 0, 0, null, opciones2, opciones2[0]);
 				switch (opcion2) {
 				case 0:
-					LinkedList<Rutina> misRutinas = ControllerRutina.MostrarRutinas(this.getIdPersonalTrainer());
-					String[] titulosRutinas = new String[misRutinas.size()];
-					for (int i = 0; i < misRutinas.size(); i++) {
-					    titulosRutinas[i] = misRutinas.get(i).getTitulo();
-					}
+					try {
+						LinkedList<Rutina> misRutinas = ControllerRutina.MostrarRutinas(this.getIdPersonalTrainer());
+						String[] titulosRutinas = new String[misRutinas.size()];
+						for (int i = 0; i < misRutinas.size(); i++) {
+						    titulosRutinas[i] = misRutinas.get(i).getTitulo();
+						}
+						String tituloSeleccionado = (String) JOptionPane.showInputDialog(null, "Elija la rutina", 
+						                        null, JOptionPane.QUESTION_MESSAGE, null, titulosRutinas, titulosRutinas[0]);
 
-					String tituloSeleccionado = (String) JOptionPane.showInputDialog(null, "Elija la rutina", 
-					                        null, JOptionPane.QUESTION_MESSAGE, null, titulosRutinas, titulosRutinas[0]);
-
-					Rutina rutinaSeleccionada = null;
-					for (Rutina rutina : misRutinas) {
-					    if (rutina.getTitulo().equals(tituloSeleccionado)) {
-					        rutinaSeleccionada = rutina;
-					        break;
-					    }
+						Rutina rutinaSeleccionada = null;
+						for (Rutina rutina : misRutinas) {
+						    if (rutina.getTitulo().equals(tituloSeleccionado)) {
+						        rutinaSeleccionada = rutina;
+						        break;
+						    }
+						}
+						JOptionPane.showMessageDialog(null, rutinaSeleccionada);
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, "Error");
 					}
-					JOptionPane.showMessageDialog(null, rutinaSeleccionada);
+					
 					break;
 
 				case 1:
@@ -162,7 +166,6 @@ public class PersonalTrainer extends Persona{
 					String eleccion = (String)JOptionPane.showInputDialog(null, "Que tipo de rutina creara?", 
 							null, JOptionPane.QUESTION_MESSAGE, null, tipoRut, tipoRut[0]);
 					try {
-						
 						
 						if (eleccion.equals("Personalizada")) {
 							this.aCargo = ControllerPersonalTrainer.MostrarAlumnos(this.getIdPersonalTrainer());
@@ -181,8 +184,17 @@ public class PersonalTrainer extends Persona{
 						       String[] partes = seleccionado.split(" ");
 						        int idAlumnoSeleccionado = Integer.parseInt(partes[0]);
 						        String titulo = JOptionPane.showInputDialog("Escriba aqui el titulo de la rutina");
-						        String descripcion = JOptionPane.showInputDialog("Escriba aqui la rutina");
-						        ControllerRutina.agregarRutina(new Rutina(descripcion,titulo,0,idAlumnoSeleccionado,this.getIdPersonalTrainer()));
+						        if (titulo!=null && !titulo.isEmpty()) {
+						        	String descripcion = JOptionPane.showInputDialog("Escriba aqui la rutina");
+						        	if (descripcion!=null && !descripcion.isEmpty()) {
+						        		ControllerRutina.agregarRutina(new Rutina(descripcion,titulo,0,idAlumnoSeleccionado,this.getIdPersonalTrainer()));
+									} else {
+										JOptionPane.showMessageDialog(null, "Ingrese una descripcion correctamente");
+									}
+								} else {
+									JOptionPane.showMessageDialog(null, "Ingrese un titulo correctamente");
+								}
+						        
 					       } catch (Exception e) {
 								JOptionPane.showMessageDialog(null, "Error, Debe elegir un alumno");
 							}

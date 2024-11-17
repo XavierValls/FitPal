@@ -48,8 +48,8 @@ public class Objetivo {
 	}
 	@Override
 	public String toString() {
-		return "Objetivo [descripcion=" + descripcion + ", fechaCreacion=" + fechaCreacion + ", fechaObj=" + fechaObj
-				+ "]";
+		return "Objetivo: " + descripcion + ", fechaCreacion: " + fechaCreacion + " fechaObj: " + fechaObj
+				+ "";
 	}
 	
 	

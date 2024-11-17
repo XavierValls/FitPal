@@ -114,8 +114,8 @@ public class Rutina {
 	}
 	@Override
 	public String toString() {
-		return "Rutina [Creada por="+ personalTrainer + ", \n Titulo=" + titulo + ",\n Rutina:\n" + descripcion
-				+"]";
+		return "Rutina Creada por "+ personalTrainer + ", \n Titulo: " + titulo + ",\n Rutina:\n" + descripcion
+				+"";
 	}
 	
 	

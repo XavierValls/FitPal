@@ -264,6 +264,8 @@ public class Alumno extends Persona {
 										ControllerObjetivo.actualizarObjetivo(new Objetivo(viejo.getIdObjetivo(),otroObj2,viejo.getFechaCreacion(),viejo.getFechaObj()));
 									}
 									
+								} else if (objetivoElegido2.equals("Volver")){
+									break;
 								} else {
 									Objetivo viejo = ControllerObjetivo.mostrarObjetivoDelAlumno(this.getIdAlumno());
 									ControllerObjetivo.actualizarObjetivo(new Objetivo(viejo.getIdObjetivo(),objetivoElegido2,viejo.getFechaCreacion(),viejo.getFechaObj()));

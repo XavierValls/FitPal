@@ -114,37 +114,40 @@ public class Persona {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", contra="
 				+ contra + ", rol=" + rol + "]";
 	}
-	public static void Loguearse() {
-		String email = JOptionPane.showInputDialog("Ingrese su Email");
-		String contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
+	public static Object Loguearse(String email, String contra) {
+		//String email = JOptionPane.showInputDialog("Ingrese su Email");
+		//String contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
 		for (Persona persona : ControllerPersona.MostrarUsuarios()) {
 			if (persona.getEmail().equals(email) && persona.getContra().equals(contra)) {
 				JOptionPane.showMessageDialog(null, "Usuario Encontrado");
 				if (persona.getRol()==1) {
 					int idPersonal = (int) ControllerPersonalTrainer.ObtenerIdPersonal(persona.getId());
 					PersonalTrainer	nuevo = new PersonalTrainer(persona.getId(), persona.getNombre(), persona.getApellido(), persona.getEmail(), persona.getContra(), persona.getRol(), idPersonal);
-					nuevo.menuPer();	
+					//nuevo.menuPer();	
+					return nuevo;
 					
 				} else {
 					int idAlumno = (int) ControllerAlumno.ObtenerIdAlumno(persona.getId());
 					Alumno nuevo2 = new Alumno(persona.getId(), persona.getNombre(), persona.getApellido(), persona.getEmail(), persona.getContra(), persona.getRol(), idAlumno);
-					nuevo2.menuAlu();
+					//nuevo2.menuAlu();
+					return nuevo2;
 				}
-				return;
+				
 			}
 		}
 		JOptionPane.showMessageDialog(null, "No se encontro ningun Usuario");
+		return null;
 		
 	}
 	
-	public static void Registrarse() {
-		String nombre = JOptionPane.showInputDialog("Ingrese su Nombre");
-		String apellido = JOptionPane.showInputDialog("Ingrese su Apellido");
+	public static void Registrarse(String nombre, String apellido, String email, String contra, int elegido) {
+		//String nombre = JOptionPane.showInputDialog("Ingrese su Nombre");
+		//String apellido = JOptionPane.showInputDialog("Ingrese su Apellido");
 		boolean flag;
-		String email;
+		//String email;
 		do {
 			flag = false;
-			email= JOptionPane.showInputDialog("Ingrese su Email");
+//			email= JOptionPane.showInputDialog("Ingrese su Email");
 			for (Persona usuario : ControllerPersona.MostrarUsuarios()) {
 				if (usuario.getEmail().equals(email)) {
 					JOptionPane.showMessageDialog(null, "El email ya se encuentra registrado");
@@ -152,8 +155,8 @@ public class Persona {
 				}
 			}
 		} while (flag);
-		String contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
-		int elegido = Integer.parseInt(JOptionPane.showInputDialog("Ingrese 1 si es PersonalTrainer, Elija 2 si es Alumno"));
+//		contra = JOptionPane.showInputDialog("Ingrese su Contraseña");
+//		elegido = Integer.parseInt(JOptionPane.showInputDialog("Ingrese 1 si es PersonalTrainer, Elija 2 si es Alumno"));
 		if (elegido==1) {
 			PersonalTrainer nuevo = new PersonalTrainer(nombre,apellido,email,contra,elegido);
 			int idUsuario = (int) ControllerPersona.agregarUsuario(nuevo);
