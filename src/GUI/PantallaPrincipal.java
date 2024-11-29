@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import BLL.Alumno;
 import BLL.Persona;
 import BLL.PersonalTrainer;
+import DLL.ControllerPersonalTrainer;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -47,7 +48,7 @@ public class PantallaPrincipal extends JFrame {
 	 */
 	public PantallaPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 410);
 		titulo = new JPanel();
 		titulo.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -55,46 +56,52 @@ public class PantallaPrincipal extends JFrame {
 		titulo.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Loguearse");
-		lblNewLabel.setBounds(210, 37, 89, 32);
+		lblNewLabel.setBounds(260, 86, 67, 32);
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		titulo.add(lblNewLabel);
 		
 		inpEmail = new JTextField();
-		inpEmail.setBounds(176, 80, 145, 20);
+		inpEmail.setBounds(170, 129, 247, 20);
 		titulo.add(inpEmail);
 		inpEmail.setColumns(10);
 		
 		JLabel email = new JLabel("Email");
-		email.setBounds(124, 83, 46, 14);
+		email.setBounds(126, 132, 46, 14);
 		titulo.add(email);
 		
 		inpPassword = new JPasswordField();
-		inpPassword.setBounds(176, 122, 145, 20);
+		inpPassword.setBounds(170, 171, 247, 20);
 		titulo.add(inpPassword);
 		
 		JLabel password = new JLabel("Contraseña");
-		password.setBounds(104, 125, 67, 14);
+		password.setBounds(98, 174, 67, 14);
 		titulo.add(password);
 		
 		JButton btnLogin = new JButton("Ingresar");
-		btnLogin.setBounds(186, 149, 119, 23);
+		btnLogin.setBounds(170, 198, 119, 23);
 		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (Persona.Loguearse(inpEmail.getText(), inpPassword.getText()) instanceof PersonalTrainer) {
-					PantallaPersonal pantalla = new PantallaPersonal();
-					pantalla.setVisible(true);
-				} else if(Persona.Loguearse(inpEmail.getText(), inpPassword.getText()) instanceof Alumno) {
-					PantallaPersonal pantallaA = new PantallaPersonal();
-					pantallaA.setVisible(true);
-				} else {
-					JOptionPane.showMessageDialog(null, "Error, no se encontro ningun usuario");
-				}
-				dispose();
-				
-				
-				
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        Persona usuario = (Persona) Persona.Loguearse(inpEmail.getText(), inpPassword.getText());
+
+		        if (usuario instanceof PersonalTrainer) {
+		            PersonalTrainer personalTrainer = (PersonalTrainer) usuario;
+		            PantallaPersonal pantalla = new PantallaPersonal(personalTrainer);
+		            pantalla.setVisible(true);
+
+		            dispose();
+		        } else if (usuario instanceof Alumno) {
+		            Alumno alumno = (Alumno) usuario;
+		            PantallaAlumno pantallaA = new PantallaAlumno(alumno);
+		            pantallaA.setVisible(true);
+
+		            dispose();
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Error, no se encontro ningun usuario");
+		        }
+		    }
 		});
+
+
 		titulo.add(btnLogin);
 		
 		JButton btnRegister = new JButton("Registrarse");
@@ -106,7 +113,7 @@ public class PantallaPrincipal extends JFrame {
 				
 			}
 		});
-		btnRegister.setBounds(180, 183, 119, 23);
+		btnRegister.setBounds(298, 198, 119, 23);
 		titulo.add(btnRegister);
 	}
 }

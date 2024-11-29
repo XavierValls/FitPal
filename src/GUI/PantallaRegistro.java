@@ -15,6 +15,8 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
 
 public class PantallaRegistro extends JFrame {
 
@@ -46,7 +48,7 @@ public class PantallaRegistro extends JFrame {
 	 */
 	public PantallaRegistro() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -54,55 +56,89 @@ public class PantallaRegistro extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblnombre = new JLabel("Nombre");
-		lblnombre.setBounds(23, 26, 74, 14);
+		lblnombre.setBounds(118, 90, 74, 14);
 		contentPane.add(lblnombre);
 		
 		JLabel lblApellido = new JLabel("Apellido");
-		lblApellido.setBounds(23, 51, 74, 14);
+		lblApellido.setBounds(118, 122, 74, 14);
 		contentPane.add(lblApellido);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(23, 76, 74, 14);
+		lblEmail.setBounds(118, 147, 74, 14);
 		contentPane.add(lblEmail);
 		
 		JLabel lblContrase = new JLabel("Contraseña");
-		lblContrase.setBounds(23, 101, 74, 14);
+		lblContrase.setBounds(92, 177, 74, 14);
 		contentPane.add(lblContrase);
 		
 		JLabel lblRol = new JLabel("Rol");
-		lblRol.setBounds(23, 126, 74, 14);
+		lblRol.setBounds(129, 205, 74, 14);
 		contentPane.add(lblRol);
 		
 		inpNombre = new JTextField();
-		inpNombre.setBounds(80, 23, 86, 20);
+		inpNombre.setBounds(166, 90, 278, 20);
 		contentPane.add(inpNombre);
 		inpNombre.setColumns(10);
 		
 		inpApellido = new JTextField();
 		inpApellido.setColumns(10);
-		inpApellido.setBounds(80, 48, 86, 20);
+		inpApellido.setBounds(166, 118, 278, 20);
 		contentPane.add(inpApellido);
 		
 		inpEmail = new JTextField();
 		inpEmail.setColumns(10);
-		inpEmail.setBounds(80, 73, 86, 20);
+		inpEmail.setBounds(166, 146, 278, 20);
 		contentPane.add(inpEmail);
 		
 		inpPassword = new JPasswordField();
-		inpPassword.setBounds(90, 101, 74, 20);
+		inpPassword.setBounds(166, 174, 278, 20);
 		contentPane.add(inpPassword);
 		
 		JComboBox inpRol = new JComboBox();
-		inpRol.setBounds(80, 126, 86, 20);
+		inpRol.setModel(new DefaultComboBoxModel(new String[] {"PersonalTrainer", "Alumno"}));
+		inpRol.setBounds(166, 202, 278, 20);
 		contentPane.add(inpRol);
+		
+		JLabel lblErrorMessage = new JLabel("");
+		lblErrorMessage.setForeground(new Color(255, 0, 0)); 
+		lblErrorMessage.setBounds(125, 220, 300, 20);
+		contentPane.add(lblErrorMessage);
 		
 		JButton btnRegistrarse = new JButton("Registrarse");
 		btnRegistrarse.addActionListener(new ActionListener() {
+			String nombre = inpNombre.getText();
+			String apellido = inpApellido.getText();
+			String email = inpEmail.getText();
+			String password = inpPassword.getText();
+			int rolSeleccionado = inpRol.getSelectedIndex() + 1;
 			public void actionPerformed(ActionEvent e) {
-				Persona.Registrarse(inpNombre.getText(), inpApellido.getText(), inpEmail.getText(), inpPassword.getText(), inpRol.getX());
+				 if (nombre.isEmpty() || apellido.isEmpty() ||email.isEmpty() ||password.isEmpty()) {
+				        lblErrorMessage.setText("Por favor, completa todos los campos.");
+				    } else {
+				        lblErrorMessage.setText("");
+				        Persona.Registrarse(inpNombre.getText(), inpApellido.getText(), inpEmail.getText(), inpPassword.getText(), rolSeleccionado);
+				        dispose();
+				        PantallaPrincipal pantalla = new PantallaPrincipal();
+						pantalla.setVisible(true);
+				    }
 			}
 		});
-		btnRegistrarse.setBounds(77, 151, 89, 23);
+		btnRegistrarse.setBounds(189, 230, 112, 23);
 		contentPane.add(btnRegistrarse);
+		
+		JLabel lblRegistro = new JLabel("Registro");
+		lblRegistro.setBounds(267, 68, 49, 14);
+		contentPane.add(lblRegistro);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaPrincipal PantallaPrincipal = new PantallaPrincipal();
+				PantallaPrincipal.setVisible(true);
+				dispose();
+			}
+		});
+		btnVolver.setBounds(313, 230, 118, 23);
+		contentPane.add(btnVolver);
 	}
 }
